@@ -18,6 +18,7 @@
     color: white;
 }
 
-#div-weather{
+.container-weather,
+.card-weather{
     display: none;
 }

@@ -11,45 +11,50 @@
 <script src="js/main.js"></script>
 <title>OpenWeatherMap API</title>
 </head>
-<body>
+    <body>
 
-    <div class="container mt-3">
-        <h2 id="title">OpenWeatherMap API</h2>
-        <div class="card">
-          <div class="card-header">Get Today's Weather for any City</div>
-          <div class="card-body">
-            <form action="javascript:void(0);" id="search" name="search">
-                <div class="mb-3 mt-3">
-                  <label for="city-name">City:</label>
-                  <input type="text" class="form-control" id="city-name" name="city-name" placeholder="Enter city name" required>
-                </div>
-                <div class="mb-3">
-                  <label for="state-code">State (optional):</label>
-                  <input type="text" class="form-control" id="state-code" name="state-code" placeholder="Enter state code">
-                </div>
-                <div class="mb-3">
-                    <label for="country-code">Country (optional):</label>
-                    <input type="text" class="form-control" id="country-code" name="country-code" placeholder="Enter country code" >
-                  </div>                
-                <button type="submit" class="btn btn-primary" onclick="formSubmit()">Submit</button>
-              </form>
-          </div> 
-        </div>
-      </div>
-
-      <div class="container mt-3" id="div-weather">
-        <h2 id="city-name-response">Weather in </h2>
-        <div class="card mb-3">
-          <div class="card-body card-body-weather" id="temp-max"></div> 
-        </div>
-        <div class="card mb-3">
-          <div class="card-body card-body-weather" id="temp-min"></div> 
-        </div>
-        <div class="card mb-3">
-          <div class="card-body card-body-weather" id="humidity"></div> 
+        <div class="container mt-3">
+            <h2 id="title">OpenWeatherMap API</h2>
+            <div class="card">
+            <div class="card-header">Get Today's Weather for any City</div>
+            <div class="card-body">
+                <form action="javascript:void(0);" id="search" name="search">
+                    <div class="mb-3 mt-3">
+                        <label for="city-name">City:</label>
+                        <input type="text" class="form-control" id="city-name" name="city-name" placeholder="Enter city name" required>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="zip-code">ZIP Code (optional):</label>
+                        <input type="text" class="form-control" id="zip-code" name="zip-code" placeholder="Enter ZIP code">
+                    </div>
+                    <div class="mb-3">
+                        <label for="state-code">State (optional):</label>
+                        <input type="text" class="form-control" id="state-code" name="state-code" placeholder="Enter state code">
+                    </div>
+                    <div class="mb-3">
+                        <label for="country-code">Country (optional):</label>
+                        <input type="text" class="form-control" id="country-code" name="country-code" placeholder="Enter country code" >
+                    </div>                
+                    <button type="submit" class="btn btn-primary" onclick="formSubmit()">Submit</button>
+                </form>
+            </div> 
+            </div>
         </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
-</body>
+        <div class="container mt-3 container-weather" >
+            <h2 id="city-name-response">Weather in </h2>
+            <div class="card mb-3 card-weather">
+                <div class="card-body card-body-weather" id="temp-max"></div> 
+            </div>
+            <div class="card mb-3 card-weather">
+                <div class="card-body card-body-weather" id="temp-min"></div> 
+            </div>
+            <div class="card mb-3 card-weather">
+                <div class="card-body card-body-weather" id="humidity"></div> 
+            </div>
+        </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    </body>
 </html>
