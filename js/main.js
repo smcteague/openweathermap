@@ -11,7 +11,6 @@ async function formSubmit() {
 
     const form = document.getElementById('search');
 
-    // getting the element's value
     let city_name = form.elements['city-name'].value.trim();
     let zip_code = form.elements['zip-code'].value.trim();
     let state_code = form.elements['state-code'].value.trim();
@@ -22,7 +21,6 @@ async function formSubmit() {
 
     let url;
     if (zip_code != '') {
-        // url = `https://api.openweathermap.org/data/2.5/weather?q=${city_name},zip=${zip_code},${state_code},${country_code}&appid=${API_KEY}`
         url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip_code},${country_code}&appid=${API_KEY}`
 
     } else {

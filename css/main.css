@@ -1,11 +1,24 @@
+body{
+    background-image: url('../images/taylor-van-riper-yQorCngxzwI-unsplash.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
 #title,
+#city-name-response{
+    display: flex;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px black;
+}
+
 .card-header{
     display: flex;
     justify-content: center;
 }
 
 .card-body-weather#temp-max{
-    background-color: rgb(250, 25, 0);
+    background-color: rgb(250, 0, 0);
     color: white;
 }
 
