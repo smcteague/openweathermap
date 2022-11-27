@@ -1,10 +1,13 @@
-const API_KEY = '6892066b3855896d04018f9c7746bfde'
+const OPENWEATHERMAP_API_KEY = '6892066b3855896d04018f9c7746bfde'
+const UNSPLASH_SECRET_KEY = 'qop1F9LXV-kgdI7wu8X2Vb9K98yBfWZ5QYEu0VqqETQ'
+const UNSPLASH_ACCESS_KEY = 'j9ep3hS7zMpzHFg45lZhbODQIhatW89W0GVnmNSwObw'
 
 /**
  * @param {string} city_name;
  * @param {string} state_code;
  * @param {string} country_code;
- * @param {string} API_KEY 
+ * @param {string} OPENWEATHERMAP_API_KEY;
+ * @param {string} UNSPLASH_SECRET_KEY;
  */
 
 async function formSubmit() {
@@ -19,31 +22,44 @@ async function formSubmit() {
         stopPropogation()
     }
 
-    let url;
+    let weather_url;
     if (zip_code != '') {
-        url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip_code},${country_code}&appid=${API_KEY}`
+        weather_url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip_code},${country_code}&appid=${OPENWEATHERMAP_API_KEY}`
 
     } else {
-        url = `https://api.openweathermap.org/data/2.5/weather?q=${city_name},${state_code},${country_code}&appid=${API_KEY}`
+        weather_url = `https://api.openweathermap.org/data/2.5/weather?q=${city_name},${state_code},${country_code}&appid=${OPENWEATHERMAP_API_KEY}`
     }
 
-    async function apiCall(url) {
+    async function apiCall(weather_url) {
         try {
-            let response = await fetch(url);
+            let response = await fetch(weather_url);
             return await response.json();
         } catch (error) {
             return error.json();
         }
     }
 
-    data = await apiCall(url)
+    data = await apiCall(weather_url)
 
-    let apiCallError = [data.cod, data.message]
-    console.log(apiCallError[0], apiCallError[1])
+    let api_call_error = [data.cod, data.message]
+
+    let image_search_url;
+    image_search_url = `https://api.unsplash.com/search/photos?query=aerial-view-of-location-${city_name},${state_code},${country_code}&client_id=${UNSPLASH_ACCESS_KEY}`
+
+    async function getImage (image_search_url) {
+        try {
+            let response = await fetch(image_search_url);
+            return await response.json();
+        } catch (error) {
+            return error.json();
+        }
+    }
+
+    image = await getImage(image_search_url)
 
     displayDiv()
 
-    if (apiCallError[0] == 200) {
+    if (api_call_error[0] == 200) {
         document.getElementById("city-name-response").innerHTML = 'Weather in ';
         document.getElementById("city-name-response").insertAdjacentHTML('beforeEnd', data.name);
         document.getElementById("temp-max").innerHTML = 'Max Temp: '
@@ -54,14 +70,16 @@ async function formSubmit() {
         document.getElementById("feels_like").insertAdjacentHTML('beforeEnd', convertKelvinToFarenheight(data.main['feels_like']) + 'F');
         document.getElementById("humidity").innerHTML = 'Humidity: '
         document.getElementById("humidity").insertAdjacentHTML('beforeEnd', data.main['humidity'] + '%');
+        document.getElementById("place-image").innerHTML = `<img src="${image['results'][0]['urls']['small']}" alt="${image['results'][0]['alt_description']}" class="img-responsive"></img>`
 
     } else {
         document.getElementById("city-name-response").innerHTML = '';
-        document.getElementById("city-name-response").innerHTML = apiCallError[0] + ' - ' + apiCallError[1];
+        document.getElementById("city-name-response").innerHTML = api_call_error[0] + ' - ' + api_call_error[1];
         document.getElementById("temp-max").innerHTML = ''
         document.getElementById("temp-min").innerHTML = ''
         document.getElementById("feels_like").innerHTML = ''
         document.getElementById("humidity").innerHTML = ''
+        document.getElementById("place-image").innerHTML = ''
     
         hideDisplayDiv()
     }
@@ -79,6 +97,14 @@ function displayDiv() {
         elem2 = document.getElementsByClassName("card-weather")[i];
         elem2.style.display = "block";
     }
+
+    elem2 = document.getElementsByClassName("container-place-image")[0];
+    elem2.style.display = "block";
+
+    for (i = 0; i < document.getElementsByClassName("card-place-image").length; i++) {
+        elem2 = document.getElementsByClassName("card-place-image")[i];
+        elem2.style.display = "block";
+    }
 }
 
 function hideDisplayDiv() {
@@ -86,5 +112,9 @@ function hideDisplayDiv() {
         elem2 = document.getElementsByClassName("card-weather")[i];
         elem2.style.display = "none";
     }
-}
 
+    for (i = 0; i < document.getElementsByClassName("card-place-image").length; i++) {
+        elem2 = document.getElementsByClassName("card-place-image")[i];
+        elem2.style.display = "none";
+    }    
+}

@@ -12,7 +12,8 @@ body{
     text-shadow: 2px 2px black;
 }
 
-.card-header{
+.card-header,
+.card-body-place-image{
     display: flex;
     justify-content: center;
 }
@@ -36,6 +37,12 @@ body{
 }
 
 .container-weather,
-.card-weather{
+.card-weather,
+.card-place-image{
     display: none;
+}
+
+.card-body-place-image>img{
+    max-width: 100%;
+    max-height: 100%;
 }
