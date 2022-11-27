@@ -50,6 +50,8 @@ async function formSubmit() {
         document.getElementById("temp-max").insertAdjacentHTML('beforeEnd', convertKelvinToFarenheight(data.main['temp_max']) + 'F');
         document.getElementById("temp-min").innerHTML = 'Min Temp: '
         document.getElementById("temp-min").insertAdjacentHTML('beforeEnd', convertKelvinToFarenheight(data.main['temp_min']) + 'F');
+        document.getElementById("feels_like").innerHTML = 'Feels Like Temp: '
+        document.getElementById("feels_like").insertAdjacentHTML('beforeEnd', convertKelvinToFarenheight(data.main['feels_like']) + 'F');
         document.getElementById("humidity").innerHTML = 'Humidity: '
         document.getElementById("humidity").insertAdjacentHTML('beforeEnd', data.main['humidity'] + '%');
 
@@ -58,6 +60,7 @@ async function formSubmit() {
         document.getElementById("city-name-response").innerHTML = apiCallError[0] + ' - ' + apiCallError[1];
         document.getElementById("temp-max").innerHTML = ''
         document.getElementById("temp-min").innerHTML = ''
+        document.getElementById("feels_like").innerHTML = ''
         document.getElementById("humidity").innerHTML = ''
     
         hideDisplayDiv()
